@@ -1,0 +1,19 @@
+.NavigationWrapper {
+  max-width: 30vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.Navigation_list {
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.Navigation_item {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  text-decoration: none;
+}

@@ -19,7 +19,13 @@ class Home extends Component {
     const { films, query } = this.state;
     return (
       <div className="HomeWrapper">
-        {films && <FilmList history={this.props.history} films={films} />}
+        {films && (
+          <FilmList
+            history={this.props.history}
+            films={films}
+            linkToHome={this.props.location.pathname}
+          />
+        )}
       </div>
     );
   }

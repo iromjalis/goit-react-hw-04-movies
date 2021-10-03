@@ -7,13 +7,23 @@ import { NavLink, Link } from 'react-router-dom';
 import Api from '../../Service/Api';
 //import { Test } from './MovieDetails.styles';
 
+// query={query}
+//         history={history}
+//         linkToHome={linkToHome}
+//         key={el.id}
+//         id={el.id}
+//         title={el.title}
+
 class MovieDetails extends Component {
   imageUrl = `https://image.tmdb.org/t/p/w500`;
+  // id = this.props.match.params.id;
+  // id = this.props.location;
+  // url = this.props.match.url;
 
   state = { film: {} };
   //console.log(props.match.url);
   async componentDidMount() {
-    const id = this.props.match.params.id;
+    const id = this.props.id;
 
     await Api.fetchMoviesById(id).then(r => this.setState({ film: r }));
   }
@@ -23,13 +33,7 @@ class MovieDetails extends Component {
 
   render() {
     const { title, tagline, overview, homepage, poster_path } = this.state.film;
-
-    // const locationId = this.props.location.state.id;
-    const id = this.props.match.params.id;
-    // console.log('id: ', id);
-    const url = this.props.match.url;
-    // console.log('url: ', url);
-
+    console.log("MD", this.props);
     return (
       <>
         <p>
@@ -42,7 +46,7 @@ class MovieDetails extends Component {
             state: {
               //   search: this.props.query !== undefined ? this.props.query : '',
               //id: this.props.film.id,
-              //   from: this.props.history.location.pathname,
+              from: this.props.history.location.pathname,
             },
           }}
         >
@@ -60,7 +64,7 @@ class MovieDetails extends Component {
         </Link>
         <NavLink
           to={{
-            pathname: `${url}/reviews`,
+            pathname: `${this.url}/reviews`,
             // state: this.props.history.location.state,
           }}
         >
@@ -68,7 +72,7 @@ class MovieDetails extends Component {
         </NavLink>
         <NavLink
           to={{
-            pathname: `${url}/cast`,
+            pathname: `${this.url}/cast`,
             // state: this.props.history.location.state,
           }}
         >

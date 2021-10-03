@@ -18,8 +18,6 @@ class FilmListItem extends Component {
     const { title, tagline, overview, homepage, poster_path } = this.state.film;
     return (
       <>
-        <h2>FilmListItem</h2>
-        <hr />
         <Link
           className={FilmList_Item}
           key={this.props.id}

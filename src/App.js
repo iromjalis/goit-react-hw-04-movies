@@ -18,7 +18,7 @@ function App() {
         <Route path="/movies" exact component={SearchMovies} />
         <Route path="/movies/:id" component={MovieDetails} />
         <Route component={NotFound} />
-        <Redirect to={{ pathname: '/' }} />
+        {/* <Redirect to={{ pathname: '/' }} /> */}
       </Switch>
     </div>
   );

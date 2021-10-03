@@ -1,4 +1,6 @@
 .FilmList_Item {
   text-decoration: none;
   text-align: left;
+  width: 250px;
+  height: auto;
 }

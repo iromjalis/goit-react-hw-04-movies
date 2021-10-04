@@ -6,31 +6,20 @@ import { NavLink } from 'react-router-dom';
 import FilmList from '../../components/FilmList/FilmList';
 //import { Test } from './Home.styles';
 
-class Home extends Component {
-  state = {
-    films: [],
-    query: '',
-  };
-  async componentDidMount() {
-    const response = await api.fetchPopularMovies();
-    this.setState({ films: response });
-  }
+function Home() {
+  const [films, setFilms] = useState([]);
+  console.log('films: ', films);
 
-  render() {
-    const { films, query } = this.state;
-    return (
-      <>
-        <h2>Popular movies are: </h2>
-        {films && (
-          <FilmList
-            history={this.props.history}
-            films={films}
-            linkToHome={this.props.location.pathname}
-          />
-        )}
-      </>
-    );
-  }
+  useEffect(() => {
+    api.fetchPopularMovies().then(r => setFilms(r));
+  }, []);
+
+  return (
+    <>
+      <h2>Popular movies are: </h2>
+      {films && <FilmList films={films} />}
+    </>
+  );
 }
 
 Home.propTypes = {

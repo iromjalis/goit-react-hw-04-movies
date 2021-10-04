@@ -7,20 +7,19 @@ import { NavLink } from 'react-router-dom';
 //import { Test } from './FilmList.styles';
 
 const FilmList = ({ films, linkToHome, history, query }) => {
-  console.log('FL history: ', history);
   return (
     <ul>
-      <h1>FilmList</h1>
-
-      {films.map(el => (
-        <MovieDetails
-          query={query}
-          history={history}
-          linkToHome={linkToHome}
-          key={el.id}
-          id={el.id}
-          title={el.title}
-        />
+      {films.map(({ title, id }) => (
+        <li key={id}>
+          <NavLink
+            to={{
+              pathname: `/movies/${id}`,
+              state: { id, from: history.location.pathname, query },
+            }}
+          >
+            {title}
+          </NavLink>
+        </li>
       ))}
     </ul>
   );

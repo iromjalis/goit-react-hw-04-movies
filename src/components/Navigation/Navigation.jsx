@@ -11,10 +11,28 @@ const Navigation = props => (
   <div className={NavigationWrapper}>
     <ul className={Navigation_list}>
       <li className={Navigation_item}>
-        <NavLink to="/">Home</NavLink>
+        <NavLink
+          exact
+          to="/"
+          activeStyle={{
+            fontWeight: 'bold',
+            color: 'blue',
+          }}
+        >
+          <h1>𝐻𝑜𝓂𝑒</h1>
+        </NavLink>
       </li>
       <li className={Navigation_item}>
-        <NavLink to="/movies">Movies</NavLink>
+        <NavLink
+          exact
+          to="/movies"
+          activeStyle={{
+            fontWeight: 'bold',
+            color: 'blue',
+          }}
+        >
+          <h1>𝑀𝑜𝓋𝒾𝑒𝓈</h1>
+        </NavLink>
       </li>
     </ul>
   </div>

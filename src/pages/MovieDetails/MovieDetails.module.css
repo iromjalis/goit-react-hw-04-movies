@@ -1,6 +1,17 @@
-// import styled from 'styled-components';
-
-// export const Test = styled.div`
-//  display: flex;
-// `;
-//
+.CastAndReviewsBtn {
+  display: inline-flex;
+  justify-content: center;
+}
+.CastBtn,
+.ReviewsBtn {
+  border: 1px solid grey;
+  border-radius: 25px;
+  padding: 7px 15px;
+  margin-left: 5px;
+}
+.CastBtn:hover,
+.CastBtn:focus ,.ReviewsBtn:hover,
+.ReviewsBtn:focus {
+  color: white;
+  background-color: gray;
+}

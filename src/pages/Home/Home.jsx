@@ -11,14 +11,16 @@ class Home extends Component {
     films: [],
     query: '',
   };
-  componentDidMount() {
-    api.fetchPopularMovies().then(r => this.setState({ films: r }));
+  async componentDidMount() {
+    const response = await api.fetchPopularMovies();
+    this.setState({ films: response });
   }
 
   render() {
     const { films, query } = this.state;
     return (
-      <div className="HomeWrapper">
+      <>
+        <h2>Popular movies are: </h2>
         {films && (
           <FilmList
             history={this.props.history}
@@ -26,7 +28,7 @@ class Home extends Component {
             linkToHome={this.props.location.pathname}
           />
         )}
-      </div>
+      </>
     );
   }
 }

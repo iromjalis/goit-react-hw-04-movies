@@ -1,15 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-//import { Test } from './Reviews.styles';
+import { useHistory } from 'react-router';
+import { useEffect, useState } from 'react';
+import Api from '../../Service/Api';
+//import { Test } from './Cast.styles';
 
-const Reviews = props => <div className="ReviewsWrapper">Reviews content</div>;
+const Cast = () => {
+  const history = useHistory();
+  const [id, setId] = useState('');
+  const [review, setReview] = useState([]);
+  useEffect(() => {
+    const id = history.location.state.id;
+    Api.fetchMoviesReviewById(id).then(setReview);
+  }, [id]);
+  return (
+    <div className="CastWrapper">
+      {review.map(({ author, content }) => (
+        <p>
+          <b>
+            <u>{author}</u>
+          </b>
+          : {content}
+        </p>
+      ))}
+    </div>
+  );
+};
 
-Reviews.propTypes = {
+Cast.propTypes = {
   // bla: PropTypes.string,
 };
 
-Reviews.defaultProps = {
+Cast.defaultProps = {
   // bla: 'test',
 };
 
-export default Reviews;
+export default Cast;

@@ -8,7 +8,6 @@ import FilmList from '../../components/FilmList/FilmList';
 
 function Home() {
   const [films, setFilms] = useState([]);
-  console.log('films: ', films);
 
   useEffect(() => {
     api.fetchPopularMovies().then(r => setFilms(r));

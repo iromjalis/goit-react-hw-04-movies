@@ -1,24 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import { useEffect, useState } from 'react';
 import Api from '../../Service/Api';
-//import { Test } from './Cast.styles';
+import s from './Cast.module.css';
 
 const Cast = () => {
-  const history = useHistory();
-  const [id, setId] = useState('');
+  const { id } = useParams();
   const [cast, setCast] = useState([]);
+
   useEffect(() => {
-    const id = history.location.state.id;
     Api.fetchMoviesCastById(id).then(setCast);
   }, [id]);
+
   return (
-    <div className="CastWrapper">
+    <div className={s.CastWrapper}>
       {cast.map(({ name, profile_path }) => (
         <>
           {profile_path !== null && (
-            <>
+            <div className={s.CastWrapper_Card}>
               <p>
                 <img
                   src={`https://image.tmdb.org/t/p/w500${profile_path}`}
@@ -26,8 +27,8 @@ const Cast = () => {
                   width="150"
                 />
               </p>
-              <p>Name: {name} </p>
-            </>
+              <p> {name} </p>
+            </div>
           )}
         </>
       ))}

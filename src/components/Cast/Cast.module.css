@@ -1,6 +1,9 @@
-// import styled from 'styled-components';
-
-// export const Test = styled.div`
-//  display: flex;
-// `;
-//
+.CastWrapper {
+  min-width: 80vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.CastWrapper_Card {
+  margin: 2px;
+}

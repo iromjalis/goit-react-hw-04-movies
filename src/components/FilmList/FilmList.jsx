@@ -1,26 +1,39 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import FilmListItem from './FilmListItem';
-import MovieDetails from '../../pages/MovieDetails/MovieDetails';
-import { NavLink } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import s from '../FilmList/FilmList.module.css';
 
-//import { Test } from './FilmList.styles';
+const FilmList = ({ films }) => {
+  const history = useHistory();
+  const [movies, setMovies] = useState();
 
-const FilmList = ({ films, linkToHome, history, query }) => {
+  useEffect(() => {
+    setMovies(films);
+  }, []);
+
   return (
-    <ul>
-      {films.map(({ title, id }) => (
-        <li key={id}>
-          <NavLink
-            to={{
-              pathname: `/movies/${id}`,
-              state: { id, from: history.location.pathname, query },
-            }}
-          >
-            {title}
-          </NavLink>
-        </li>
-      ))}
+    <ul className={s.FilmList}>
+      {films &&
+        films.map(({ title, id, poster_path }) => (
+          <li key={id} className={s.FilmList_Item}>
+            <Link
+              to={{
+                pathname: `/movies/${id}`,
+                state: {
+                  ref: history.location.pathname,
+                  search: history.location.search,
+                },
+              }}
+            >
+              <img
+                src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                alt={title}
+                width="150"
+                title={title}
+              />
+            </Link>
+          </li>
+        ))}
     </ul>
   );
 };

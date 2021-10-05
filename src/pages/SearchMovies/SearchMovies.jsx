@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { render } from '@testing-library/react';
-import Api from '../../Service/Api';
+import { fetchMoviesByQuery } from '../../Service/Api';
 import FilmList from '../../components/FilmList/FilmList';
-//import { Test } from './SearchMovies.styles';
+import s from './SearchMovies.module.css';
 
 function SearchMovies() {
   const location = useLocation();
@@ -20,17 +20,14 @@ function SearchMovies() {
     if (!storedSearchQuery) {
       return;
     }
-    Api.fetchMoviesByQuery(storedSearchQuery).then(({ results }) => {
-      setSearchMovies(results);
-    });
+    fetchMoviesByQuery(searchQuery).then(setSearchMovies);
   }, [storedSearchQuery]);
 
   const handleSubmit = async e => {
     e.preventDefault();
-    await Api.fetchMoviesByQuery(searchQuery).then(res => setSearchMovies(res));
-    if (searchQuery.trim() === '') {
-      return;
-    }
+    const searchQuery = e.target.value;
+    const response = fetchMoviesByQuery().then(setSearchMovies);
+
     history.push({
       ...location,
       search: `queryBy=${searchQuery}`,
@@ -41,16 +38,19 @@ function SearchMovies() {
   };
   return (
     <>
-      <form className="SearchMoviesWrapper" onSubmit={handleSubmit}>
+      <form className={s.SearchMoviesWrapper} onSubmit={handleSubmit}>
         <label>
           <input
+            className={s.SearchMoviesWrapper_input}
             onChange={handleChange}
             type="text"
             placeholder="typing movie title..."
             value={searchQuery}
           ></input>
         </label>
-        <button type="submit">Search</button>
+        <button type="submit" className={s.Btn}>
+          Search
+        </button>
       </form>
       <FilmList films={searchMovies} history={history} query={searchQuery} />
     </>

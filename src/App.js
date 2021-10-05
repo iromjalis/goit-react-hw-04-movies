@@ -13,19 +13,19 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
   return (
-    <Suspense
-      fallback={
-        <Loader
-          type="ThreeDots"
-          color="#00BFFF"
-          height={80}
-          width={80}
-          timeout={3000}
-        />
-      }
-    >
-      <Navigation />
-      <div className="App">
+    <>
+      <Suspense
+        fallback={
+          <Loader
+            type="ThreeDots"
+            color="#00BFFF"
+            height={80}
+            width={80}
+            timeout={3000}
+          />
+        }
+      >
+        <Navigation />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/movies" component={SearchMovies} />
@@ -33,8 +33,8 @@ function App() {
           <Route component={NotFound} />
           <Redirect to="/" />
         </Switch>
-      </div>
-    </Suspense>
+      </Suspense>
+    </>
   );
 }
 

@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
-import { useHistory } from 'react-router';
 import { useEffect, useState } from 'react';
-import Api from '../../Service/Api';
+import { fetchMoviesReviewById } from '../../Service/Api';
 import s from '../Cast/Cast';
 
 const Reviews = () => {
@@ -11,7 +10,7 @@ const Reviews = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    Api.fetchMoviesReviewById(id).then(r => setReviews(r));
+    fetchMoviesReviewById(id).then(r => setReviews(r));
   }, [id]);
 
   return (

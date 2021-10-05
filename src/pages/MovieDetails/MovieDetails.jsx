@@ -5,11 +5,11 @@ import {
   useRouteMatch,
   useHistory,
 } from 'react-router-dom';
-import Loader from 'react-loader-spinner';
-import Api from '../../Service/Api';
+import { fetchMoviesById } from '../../Service/Api';
 import styles from './MovieDetails.module.css';
-import { useEffect, useState, lazy, Suspense } from 'react';
-import PropTypes from 'prop-types';
+import { useEffect, useState, lazy } from 'react';
+import { Switch } from 'react-router-dom';
+// import PropTypes from 'prop-types';
 const Cast = lazy(() => import('../../components/Cast/Cast'));
 const Reviews = lazy(() => import('../../components/Reviews/Reviews'));
 
@@ -22,7 +22,7 @@ function Moviedetails() {
   const { ref, search } = history.location.state;
 
   useEffect(() => {
-    const response = Api.fetchMoviesById(id).then(r => setFilm(r));
+    const response = fetchMoviesById(id).then(r => setFilm(r));
   }, [id]);
 
   return (
@@ -66,9 +66,10 @@ function Moviedetails() {
           Review
         </Link>
       </div>
-
-      <Route path={`${path}/reviews`} component={Reviews} />
-      <Route path={`${path}/cast`} component={Cast} />
+      <Switch>
+        <Route path={`${path}/reviews`} component={Reviews} />
+        <Route path={`${path}/cast`} component={Cast} />
+      </Switch>
     </>
   );
 }

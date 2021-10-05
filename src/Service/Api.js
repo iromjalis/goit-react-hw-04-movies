@@ -1,42 +1,36 @@
-import axios from "axios";
+import axios from 'axios';
 
-const API_KEY = "0dba41d64d38d3842f2e56a581ca4bf3";
-const Api = {
-  fetchPopularMovies() {
-    return axios
-      .get(
-        `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`
-      )
-      .then((r) => r.data.results);
-  },
-  fetchMoviesByQuery(query) {
-    return axios
-      .get(
-        `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=1a7532c831c19ca759402dbd11644ca2&language=en-US&page=1&include_adult=false`
-      )
-      .then((r) => r.data.results);
-  },
-  fetchMoviesById(id) {
-    return axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=1a7532c831c19ca759402dbd11644ca2&language=en-US`
-      )
-      .then((r) => r.data);
-  },
-  fetchMoviesCastById(id) {
-    return axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=1a7532c831c19ca759402dbd11644ca2&language=en-US`
-      )
-      .then((r) => r.data.cast);
-  },
-  fetchMoviesReviewById(id) {
-    return axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=1a7532c831c19ca759402dbd11644ca2&language=en-US&page=1`
-      )
-      .then((r) => r.data.results);
-  },
+const BASE_URL = 'https://api.themoviedb.org/3/';
+const API_KEY = '0dba41d64d38d3842f2e56a581ca4bf3';
+
+axios.defaults.baseURL = BASE_URL;
+axios.defaults.params = {
+  api_key: API_KEY,
 };
 
-export default Api;
+async function fetchFilms(url, query) {
+  const response = await axios(url, { params: { query } });
+  return response.data;
+}
+
+export async function fetchPopularMovies() {
+  const response = await fetchFilms('trending/movie/day');
+  return response.results;
+}
+
+export async function fetchMoviesById(id) {
+  const response = await fetchFilms(`movie/${id}`);
+  return response;
+}
+export async function fetchMoviesCastById(id) {
+  const response = await fetchFilms(`movie/${id}/credits`);
+  return response.cast;
+}
+export async function fetchMoviesReviewById(id) {
+  const response = await fetchFilms(`movie/${id}/reviews`);
+  return response.results;
+}
+export async function fetchMoviesByQuery(query) {
+  const response = await fetchFilms(`search/movie`, query);
+  return response.results;
+}

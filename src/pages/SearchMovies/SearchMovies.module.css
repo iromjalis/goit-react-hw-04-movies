@@ -1,6 +1,19 @@
-// import styled from 'styled-components';
-
-// export const Test = styled.div`
-//  display: flex;
-// `;
-//
+.SearchMoviesWrapper {
+  text-align-last: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.SearchMoviesWrapper_input,
+.Btn {
+  text-align-last: left;
+  border: 1px solid grey;
+  padding: 5px 9px;
+  border-radius: 25px;
+  margin-right: 5px;
+}
+.Btn:hover,
+.Btn:focus {
+  background-color: grey;
+  color: white;
+  cursor: pointer;
+}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Component } from 'react';
 import PropTypes from 'prop-types';
-import api from '../../Service/Api';
+import { fetchPopularMovies } from '../../Service/Api';
 import { render } from '@testing-library/react';
 import { NavLink } from 'react-router-dom';
 import FilmList from '../../components/FilmList/FilmList';
@@ -10,15 +10,10 @@ function Home() {
   const [films, setFilms] = useState([]);
 
   useEffect(() => {
-    api.fetchPopularMovies().then(r => setFilms(r));
+    fetchPopularMovies().then(setFilms);
   }, []);
 
-  return (
-    <>
-      <h2>Popular movies are: </h2>
-      {films && <FilmList films={films} />}
-    </>
-  );
+  return <>{films && <FilmList films={films} title="Popular movies are:" />}</>;
 }
 
 Home.propTypes = {

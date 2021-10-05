@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
-import { useHistory } from 'react-router';
 import { useEffect, useState } from 'react';
-import Api from '../../Service/Api';
+import { fetchMoviesCastById } from '../../Service/Api';
 import s from './Cast.module.css';
 
 const Cast = () => {
@@ -11,7 +10,7 @@ const Cast = () => {
   const [cast, setCast] = useState([]);
 
   useEffect(() => {
-    Api.fetchMoviesCastById(id).then(setCast);
+    fetchMoviesCastById(id).then(setCast);
   }, [id]);
 
   return (

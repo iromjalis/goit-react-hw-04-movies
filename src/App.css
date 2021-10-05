@@ -57,3 +57,6 @@ a {
   list-style: none;
   color: black;
 }
+* {
+  text-align: center;
+}

@@ -2,10 +2,11 @@ import React, { Component, lazy, Suspense } from 'react';
 import Loader from 'react-loader-spinner';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import routes from './routes';
+import Navigation from './components/Navigation';
 //styles
 import css from './App.css';
 //lazy components
-const Navigation = lazy(() => import('./components/Navigation/Navigation'));
+// const Navigation = lazy(() => import('./components/Navigation/Navigation'));
 const Home = lazy(() => import('./pages/Home/Home'));
 const SearchMovies = lazy(() => import('./pages/SearchMovies'));
 const MovieDetails = lazy(() => import('./pages/MovieDetails'));
@@ -31,7 +32,6 @@ function App() {
           <Route exact path="/movies" component={SearchMovies} />
           <Route path="/movies/:id" component={MovieDetails} />
           <Route component={NotFound} />
-          <Redirect to="/" />
         </Switch>
       </Suspense>
     </>

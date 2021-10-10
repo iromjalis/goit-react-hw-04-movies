@@ -1,12 +1,8 @@
 import React, { Component, lazy, Suspense } from 'react';
 import Loader from 'react-loader-spinner';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import routes from './routes';
+import { Route, Switch} from 'react-router-dom';
 import Navigation from './components/Navigation';
-//styles
-import css from './App.css';
 //lazy components
-// const Navigation = lazy(() => import('./components/Navigation/Navigation'));
 const Home = lazy(() => import('./pages/Home/Home'));
 const SearchMovies = lazy(() => import('./pages/SearchMovies'));
 const MovieDetails = lazy(() => import('./pages/MovieDetails'));

@@ -1,4 +1,5 @@
 .NavigationWrapper {
+  text-decoration: none;
   max-width: 95vw;
   margin-left: auto;
   margin-right: auto;
@@ -13,6 +14,7 @@
 }
 
 .Navigation_list {
+  text-decoration: none;
   padding: 0;
   display: flex;
   flex-wrap: wrap;

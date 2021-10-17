@@ -5,11 +5,12 @@ import {
   useRouteMatch,
   useHistory,
 } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
 import { fetchMoviesById } from '../../Service/Api';
 import styles from './MovieDetails.module.css';
-import { useEffect, useState, lazy } from 'react';
+import { useEffect, useState, Suspense, lazy } from 'react';
 import { Switch } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+//lazy
 const Cast = lazy(() => import('../../components/Cast/Cast'));
 const Reviews = lazy(() => import('../../components/Reviews/Reviews'));
 
@@ -66,10 +67,23 @@ function Moviedetails() {
           Review
         </Link>
       </div>
-      <Switch>
-        <Route path={`${path}/reviews`} component={Reviews} />
-        <Route path={`${path}/cast`} component={Cast} />
-      </Switch>
+
+      <Suspense
+        fallback={
+          <Loader
+            type="ThreeDots"
+            color="#00BFFF"
+            height={80}
+            width={80}
+            timeout={3000}
+          />
+        }
+      >
+        <Switch>
+          <Route path={`${path}/reviews`} component={Reviews} />
+          <Route path={`${path}/cast`} component={Cast} />
+        </Switch>
+      </Suspense>
     </>
   );
 }

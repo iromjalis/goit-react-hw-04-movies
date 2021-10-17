@@ -7,7 +7,7 @@ import css from './index.css';
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <App classname={css.App} />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),

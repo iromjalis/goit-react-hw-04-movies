@@ -10,8 +10,12 @@
   margin-left: 5px;
 }
 .CastBtn:hover,
-.CastBtn:focus ,.ReviewsBtn:hover,
+.CastBtn:focus,
+.ReviewsBtn:hover,
 .ReviewsBtn:focus {
   color: white;
   background-color: gray;
+}
+.Moviedetails {
+  text-align: center;
 }

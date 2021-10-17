@@ -9,3 +9,11 @@
 h2 {
   text-align: center;
 }
+.FilmList_Item {
+  margin: 10px;
+  text-decoration: none;
+  color: white;
+}
+li {
+  text-decoration: none;
+}

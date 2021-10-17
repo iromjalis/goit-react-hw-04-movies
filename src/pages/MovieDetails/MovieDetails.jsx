@@ -8,11 +8,16 @@ import {
 import Loader from 'react-loader-spinner';
 import { fetchMoviesById } from '../../Service/Api';
 import styles from './MovieDetails.module.css';
-import { useEffect, useState, Suspense, lazy } from 'react';
+import { useEffect, useState, Suspense, lazy, Fragment } from 'react';
 import { Switch } from 'react-router-dom';
+import s from './MovieDetails.module.css';
 //lazy
-const Cast = lazy(() => import('../../components/Cast/Cast'));
-const Reviews = lazy(() => import('../../components/Reviews/Reviews'));
+const Cast = lazy(() =>
+  import('../../components/Cast/Cast' /*webpackChunkName: "Cast"*/),
+);
+const Reviews = lazy(() =>
+  import('../../components/Reviews/Reviews' /*webpackChunkName: "Reviews"*/),
+);
 
 function Moviedetails() {
   const { id } = useParams();
@@ -27,7 +32,7 @@ function Moviedetails() {
   }, [id]);
 
   return (
-    <>
+    <Fragment className={s.Moviedetails}>
       <p>
         <Link to={`${ref}${search}` ? `${ref}${search}` : '/'}>
           <button type="button">Go back</button>
@@ -84,7 +89,7 @@ function Moviedetails() {
           <Route path={`${path}/cast`} component={Cast} />
         </Switch>
       </Suspense>
-    </>
+    </Fragment>
   );
 }
 export default Moviedetails;
